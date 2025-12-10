@@ -5,26 +5,13 @@
 <script>
 export default {
   name: "TestFetch",
-    data() {
-      return {
-        posts: [],
-      };
-    },
-    methods: {
-      fetchPosts() {
-        fetch(`http://localhost:3000/api/posts/`)
-            .then((response) => response.json())
-            .then((data) => {
-              this.posts = data
-              console.log(data)})
-            .catch((err) => console.log(err.message));
-      },
-    },
-    mounted() {
-      this.fetchPosts();
-      console.log("mounted");
-    }
-};
+  data() {
+    return {
+      posts: [],
+    };
+  },
+  methods: {},
+}
 </script>
 
 <style scoped>
