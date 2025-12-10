@@ -9,7 +9,7 @@ const routes = [
      path: "/",
      name:"AllPostsView",
      component: () => import("@/views/AllPostsView.vue"),
-        /*
+
      beforeEnter: async(to, from, next) => {
             let authResult = await auth.authenticated();
             if (!authResult) {
@@ -19,7 +19,7 @@ const routes = [
             }
      }
 
-         */
+
     },
     {
         path: "/signup",
@@ -35,16 +35,6 @@ const routes = [
         path:"/test",
         name: "TestFetch",
         component: TestFetch,
-
-        beforeEnter: async(to, from, next) => {
-            let authResult = await auth.authenticated();
-            if (!authResult) {
-                next('/login')
-            } else {
-                next();
-            }
-        }
-
 
     }
 
