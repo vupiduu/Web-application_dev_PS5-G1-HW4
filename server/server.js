@@ -32,3 +32,20 @@ app.get('/api/posts', async (req, res) => {
         res.status(500).send("Server Error");
     }
 })
+
+app.get('/api/post/:id', async (req, res) => {
+    try{
+        const post = await pool.query('SELECT * FROM posttable WHERE id = $1');
+        res.json(post.rows);
+    } catch (e) {
+        console.log(e.message);
+    }
+})
+
+app.delete('/api/delete/allPosts', async (req, res) => {
+    try {
+        await pool.query('DELETE FROM posttable');
+    } catch (e) {
+        console.log(e.message);
+    }
+})
