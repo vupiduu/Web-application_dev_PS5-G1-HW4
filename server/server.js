@@ -23,3 +23,12 @@ const generateJWT = (id) => {
     return jwt.sign({ id }, secret, { expiresIn: '1h' });
 }
 
+app.get('/api/posts', async (req, res) => {
+    try {
+        const posts = await pool.query('SELECT * FROM posttable ORDER BY date DESC;');
+        res.json(posts.rows);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Server Error");
+    }
+})
