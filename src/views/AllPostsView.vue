@@ -15,11 +15,17 @@
       <div class="posts-area">
         <p v-if="posts.length === 0">No posts yet.</p>
 
-        <ul v-else>
-          <li v-for="post in posts" :key="post.id" class="post-item">
-            {{ post.body }}
-          </li>
-        </ul>
+        <div v-else class="posts-list">
+          <div 
+            class="post-card"
+            v-for="post in posts"
+            :key="post.id"
+            @click="$router.push('/post/' + post.id)"
+          >
+            <div class="post-date">{{ formatDate(post.date) }}</div>
+            <div class="post-body">{{ post.body }}</div>
+          </div>
+        </div>
       </div>
       <div class="bottom-buttons">
         <button class="action-btn" @click="goToAddPost">Add Post</button>
@@ -75,6 +81,14 @@ export default {
       const data = await res.json();
       this.posts = data;
     },
+    formatDate(dateString) {
+      const date = new Date(dateString);
+      return date.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      });
+    }
   }
 
 };
@@ -162,6 +176,41 @@ main {
   flex-direction: row;
   justify-content: center;
   gap: 20px;
+}
+
+.posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.post-card {
+  background: #e6e6e6;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.1s ease, background-color 0.2s ease;
+}
+
+.post-card:hover {
+  background: #dcdcdc;
+  transform: translateY(-2px);
+}
+
+.post-date {
+  font-size: 0.85rem;
+  color: #555;
+  text-align: right;
+  margin-bottom: 5px;
+}
+
+.post-body {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  white-space: pre-wrap; /* keeps line breaks */
 }
 
 </style>
