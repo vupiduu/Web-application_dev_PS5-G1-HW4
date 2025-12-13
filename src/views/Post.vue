@@ -1,7 +1,7 @@
 <template>
   <div class="edit-post-wrapper" v-if="post">
     <div class="edit-post-box">
-      <h2>Edit Post from {{ post.date }}</h2>
+      <h2>Edit Post from {{ formatDate(post.date) }}</h2>
 
       <textarea 
         v-model="post.body" 
@@ -27,23 +27,13 @@ export default {
       },
     };
   },
-  /*
-  async created() {
-    const id = this.$route.params.id;
-    const res = await fetch(`http://localhost:3000/api/post/${id}`, {
-      credentials: "include"
-    });
-    const data = await res.json();
-    this.post = data[0];   // backend returns an array
-  },
-   */
   methods: {
     fetchAPost(id) {
-      fetch(`http://localhost:3000/api/posts/${id}`, {
+      fetch(`http://localhost:3000/api/post/${id}`, {
         credentials: "include"
       })
           .then((response) => response.json())
-          .then((data) => (this.post = data))
+          .then((data) => {this.post = data[0]})
           .catch((err) => console.log(err.message));
     },
     async updatePost() {
@@ -66,6 +56,14 @@ export default {
       });
 
       this.$router.push("/");
+    },
+    formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+        });
     }
 },
   mounted() {
@@ -153,5 +151,5 @@ export default {
     .delete-btn:hover {
     background-color: #e06666;
     }
-    
+
 </style>

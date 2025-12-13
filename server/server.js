@@ -35,7 +35,8 @@ app.get('/api/posts', async (req, res) => {
 
 app.get('/api/post/:id', async (req, res) => {
     try{
-        const post = await pool.query('SELECT * FROM posttable WHERE id = $1');
+        const {id} = req.params;
+        const post = await pool.query('SELECT * FROM posttable WHERE id = $1', [id]);
         res.json(post.rows);
     } catch (e) {
         console.log(e.message);
