@@ -36,12 +36,11 @@ export default {
 </script>
 
 <style scoped>
-/* Wrapper centers everything on the page */
 .add-post-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 120px); /* subtract header height */
+  height: calc(100vh - 120px);
   padding: 20px;
 }
 
