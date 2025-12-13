@@ -40,10 +40,6 @@ export default {
      posts: [],
     };
   },
-
-    created() {
-    this.fetchPosts();
-  },
   methods: {
     Logout(){
       fetch("http://localhost:3000/auth/logout", {
@@ -75,7 +71,10 @@ export default {
       const data = await res.json();
       this.posts = data;
     },
-  }
+  },
+  mounted() {
+    this.fetchPosts();
+  },
 
 };
 </script>

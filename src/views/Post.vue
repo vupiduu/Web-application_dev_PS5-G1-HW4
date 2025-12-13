@@ -19,8 +19,15 @@
 <script>
 export default {
   data() {
-    return { post: null };
+    return {
+      post: {
+        id: "",
+        body: "",
+        date: "",
+      },
+    };
   },
+  /*
   async created() {
     const id = this.$route.params.id;
     const res = await fetch(`http://localhost:3000/api/post/${id}`, {
@@ -29,7 +36,16 @@ export default {
     const data = await res.json();
     this.post = data[0];   // backend returns an array
   },
+   */
   methods: {
+    fetchAPost(id) {
+      fetch(`http://localhost:3000/api/posts/${id}`, {
+        credentials: "include"
+      })
+          .then((response) => response.json())
+          .then((data) => (this.post = data))
+          .catch((err) => console.log(err.message));
+    },
     async updatePost() {
       await fetch(`http://localhost:3000/api/post/${this.post.id}`, {
         method: "PUT",
@@ -51,7 +67,10 @@ export default {
 
       this.$router.push("/");
     }
-}
+},
+  mounted() {
+    this.fetchAPost(this.$route.params.id);
+  },
 };
 </script>
 
