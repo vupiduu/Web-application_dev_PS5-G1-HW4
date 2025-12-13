@@ -10,26 +10,40 @@
 </template>
 
 <script>
-import axios from "@/axios";
-
 export default {
   data() {
     return { post: null };
   },
   async created() {
-    const { id } = this.$route.params;
-    const res = await axios.get(`/api/post/${id}`);
-    this.post = res.data;
+    const id = this.$route.params.id;
+    const res = await fetch(`http://localhost:3000/api/post/${id}`, {
+      credentials: "include"
+    });
+    const data = await res.json();
+    this.post = data[0];   // backend returns an array
   },
   methods: {
     async updatePost() {
-      await axios.put(`/api/post/${this.post.id}`, { body: this.post.body });
+      await fetch(`http://localhost:3000/api/post/${this.post.id}`, {
+        method: "PUT",
+        credentials: "include",
+        headers: { 
+          "Content-Type": "application/json" 
+        },
+        body: JSON.stringify({ body: this.post.body })
+      });
+
       this.$router.push("/");
     },
+
     async deletePost() {
-      await axios.delete(`/api/posts/${this.post.id}`);
+      await fetch(`http://localhost:3000/api/post/${this.post.id}`, {
+        method: "DELETE",
+        credentials: "include"
+      });
+
       this.$router.push("/");
     }
-  }
+}
 };
 </script>

@@ -9,8 +9,6 @@
 </template>
 
 <script>
-import axios from "@/axios";
-
 export default {
   data() {
     return {
@@ -19,7 +17,12 @@ export default {
   },
   methods: {
     async submitPost() {
-      await axios.post("/api/posts", { body: this.body });
+      await fetch("http://localhost:3000/api/posts", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ body: this.body })
+      });
       this.$router.push("/");
     }
   }

@@ -25,7 +25,7 @@ const routes = [
     {
     path: "/add-post",
     name: "AddPostView",
-    component: () => import("@/views/AddPostView.vue"),
+    component: () => import("@/views/AddPost.vue"),
 
     beforeEnter: async (to, from, next) => {
         let authResult = await auth.authenticated();
@@ -36,7 +36,7 @@ const routes = [
     {
     path: "/post/:id",
     name: "SinglePostView",
-    component: () => import("@/views/SinglePostView.vue"),
+    component: () => import("@/views/Post.vue"),
 
     beforeEnter: async (to, from, next) => {
         let authResult = await auth.authenticated();
