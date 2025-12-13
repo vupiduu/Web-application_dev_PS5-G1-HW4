@@ -22,6 +22,28 @@ const routes = [
 
     },
     {
+    path: "/add-post",
+    name: "AddPostView",
+    component: () => import("@/views/AddPostView.vue"),
+
+    beforeEnter: async (to, from, next) => {
+        let authResult = await auth.authenticated();
+        if (!authResult) next("/login");
+        else next();
+    }
+    },
+    {
+    path: "/post/:id",
+    name: "SinglePostView",
+    component: () => import("@/views/SinglePostView.vue"),
+
+    beforeEnter: async (to, from, next) => {
+        let authResult = await auth.authenticated();
+        if (!authResult) next("/login");
+        else next();
+    }
+    },
+    {
         path: "/signup",
         name: "signupView",
         component: SignupView,

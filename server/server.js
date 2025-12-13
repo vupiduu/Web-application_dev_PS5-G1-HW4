@@ -113,3 +113,54 @@ app.get('/auth/authenticate', async(req, res) => {
 app.listen(port, () => {
     console.log("Server is listening to port " + port)
 });
+
+app.post('/api/posts', async (req, res) => {
+    try {
+        const { body } = req.body;
+
+        if (!body) return res.status(400).json({ error: "Body is required" });
+
+        await pool.query(
+            'INSERT INTO posttable (body, date) VALUES ($1, NOW())',
+            [body]
+        );
+
+        res.json({ success: true });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Server Error");
+    }
+});
+
+app.put('/api/post/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { body } = req.body;
+
+        await pool.query(
+            'UPDATE posttable SET body = $1 WHERE id = $2',
+            [body, id]
+        );
+
+        res.json({ success: true });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Server Error");
+    }
+});
+
+app.delete('/api/post/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        await pool.query(
+            'DELETE FROM posttable WHERE id = $1',
+            [id]
+        );
+
+        res.json({ success: true });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Server Error");
+    }
+});
