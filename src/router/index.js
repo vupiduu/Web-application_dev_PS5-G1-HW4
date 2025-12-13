@@ -3,6 +3,7 @@ import TestFetch from "@/views/TestFetch.vue";
 import SignupView from "@/views/SignupView.vue";
 import LoginView from "@/views/LoginView.vue";
 import auth from "@/router/auth";
+import ContactUsView from "@/views/ContactUsView.vue";
 
 const routes = [
     {
@@ -57,7 +58,11 @@ const routes = [
         path:"/test",
         name: "TestFetch",
         component: TestFetch,
-
+    },
+    {
+        path: '/contact',
+        name: 'ContactUsView',
+        component: ContactUsView,
     }
 
 ]

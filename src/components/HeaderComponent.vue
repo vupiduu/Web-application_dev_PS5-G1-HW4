@@ -7,7 +7,7 @@
     <h1>{{ title }}</h1>
     <nav>
       <router-link to="/">Home</router-link>
-      <!-- <router-link to="/test">Test</router-link> -->
+      <router-link to="/contact">Contact</router-link>
     </nav>
   </header>
 </template>
