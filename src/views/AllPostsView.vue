@@ -40,6 +40,10 @@ export default {
      posts: [],
     };
   },
+
+    created() {
+    this.fetchPosts();
+  },
   methods: {
     Logout(){
       fetch("http://localhost:3000/auth/logout", {
@@ -64,7 +68,13 @@ export default {
       alert("All posts deleted!");
     },
 
-
+    async fetchPosts() {
+      const res = await fetch("http://localhost:3000/api/posts", {
+        credentials: "include",
+      });
+      const data = await res.json();
+      this.posts = data;
+    },
   }
 
 };
