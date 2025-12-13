@@ -177,4 +177,40 @@ main {
   gap: 20px;
 }
 
+.posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.post-card {
+  background: #e6e6e6;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.1s ease, background-color 0.2s ease;
+}
+
+.post-card:hover {
+  background: #dcdcdc;
+  transform: translateY(-2px);
+}
+
+.post-date {
+  font-size: 0.85rem;
+  color: #555;
+  text-align: right;
+  margin-bottom: 5px;
+}
+
+.post-body {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  white-space: pre-wrap; /* keeps line breaks */
+}
+
+
 </style>
