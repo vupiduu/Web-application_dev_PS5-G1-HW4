@@ -15,11 +15,17 @@
       <div class="posts-area">
         <p v-if="posts.length === 0">No posts yet.</p>
 
-        <ul v-else>
-          <li v-for="post in posts" :key="post.id" class="post-item">
-            {{ post.body }}
-          </li>
-        </ul>
+        <div v-else class="posts-list">
+          <div
+            class="post-card"
+            v-for="post in posts"
+            :key="post.id"
+            @click="$router.push('/post/' + post.id)"
+          >
+            <div class="post-date">{{ formatDate(post.date) }}</div>
+            <div class="post-body">{{ post.body }}</div>
+          </div>
+        </div>
       </div>
       <div class="bottom-buttons">
         <button class="action-btn" @click="goToAddPost">Add Post</button>
@@ -71,11 +77,20 @@ export default {
       const data = await res.json();
       this.posts = data;
     },
-  },
-  mounted() {
-    this.fetchPosts();
-  },
 
+    formatDate(dateString) {
+      const date = new Date(dateString);
+      return date.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      });
+    }
+  }
+},
+mounted() {
+  this.fetchPosts();
+},
 };
 </script>
 
