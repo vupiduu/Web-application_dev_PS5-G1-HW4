@@ -18,16 +18,16 @@ export default {
   },
   async created() {
     const { id } = this.$route.params;
-    const res = await axios.get(`/posts/${id}`);
+    const res = await axios.get(`/api/post/${id}`);
     this.post = res.data;
   },
   methods: {
     async updatePost() {
-      await axios.put(`/posts/${this.post.id}`, { body: this.post.body });
+      await axios.put(`/api/post/${this.post.id}`, { body: this.post.body });
       this.$router.push("/");
     },
     async deletePost() {
-      await axios.delete(`/posts/${this.post.id}`);
+      await axios.delete(`/api/posts/${this.post.id}`);
       this.$router.push("/");
     }
   }
