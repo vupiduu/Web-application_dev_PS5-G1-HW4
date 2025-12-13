@@ -86,8 +86,7 @@ export default {
         year: "numeric",
       });
     }
-  }
-},
+  },
 mounted() {
   this.fetchPosts();
 },
