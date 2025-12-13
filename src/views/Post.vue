@@ -1,11 +1,18 @@
 <template>
-  <div v-if="post">
-    <h2>Post from {{ post.date }}</h2>
+  <div class="edit-post-wrapper" v-if="post">
+    <div class="edit-post-box">
+      <h2>Edit Post from {{ post.date }}</h2>
 
-    <textarea v-model="post.body"></textarea>
+      <textarea 
+        v-model="post.body" 
+        class="post-textarea"
+      ></textarea>
 
-    <button @click="updatePost">Update</button>
-    <button @click="deletePost">Delete</button>
+      <div class="button-row">
+        <button class="update-btn" @click="updatePost">Update</button>
+        <button class="delete-btn" @click="deletePost">Delete</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -47,3 +54,85 @@ export default {
 }
 };
 </script>
+
+<style scoped>
+    /* Center the whole page */
+    .edit-post-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 120px);
+    padding: 20px;
+    }
+
+    /* White card container */
+    .edit-post-box {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    width: 60%;
+    max-width: 700px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    }
+
+    /* Title styling */
+    .edit-post-box h2 {
+    margin-bottom: 1rem;
+    color: #2b2b2b;
+    }
+
+    /* Textarea styling */
+    .post-textarea {
+    width: 100%;
+    height: 150px;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid #aaa;
+    resize: none;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    }
+
+    /* Button row (side-by-side) */
+    .button-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    }
+
+    /* Update button */
+    .update-btn {
+    padding: 0.8rem 2rem;
+    background-color: #42a36b;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 200ms ease;
+    }
+
+    .update-btn:hover {
+    background-color: #54c77f;
+    }
+
+    /* Delete button */
+    .delete-btn {
+    padding: 0.8rem 2rem;
+    background-color: #c94f4f;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 200ms ease;
+    }
+
+    .delete-btn:hover {
+    background-color: #e06666;
+    }
+    
+</style>

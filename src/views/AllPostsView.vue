@@ -11,6 +11,20 @@
     <div id="main-content">
       Test
       <button id="logout" @click="Logout">Logout</button>
+
+      <div class="posts-area">
+        <p v-if="posts.length === 0">No posts yet.</p>
+
+        <ul v-else>
+          <li v-for="post in posts" :key="post.id" class="post-item">
+            {{ post.body }}
+          </li>
+        </ul>
+      </div>
+      <div class="bottom-buttons">
+        <button class="action-btn" @click="goToAddPost">Add Post</button>
+        <button class="action-btn delete-btn" @click="deleteAllPosts">Delete All Posts</button>
+      </div>
     </div>
     <div id="sidebar-right">
       <p>sidebar-right</p>
@@ -36,7 +50,21 @@ export default {
             location.assign("/");
           })
           .catch((err) => console.log("error logout"));
-    }
+    },
+    
+    goToAddPost() {
+      this.$router.push("/add-post");
+    },
+
+    async deleteAllPosts() {
+      await fetch("http://localhost:3000/api/delete/allPosts", {
+        method: "DELETE",
+        credentials: "include",
+      });
+      alert("All posts deleted!");
+    },
+
+
   }
 
 };
@@ -90,6 +118,40 @@ main {
   color: #35495e;
   background-color: #54c77f;
   cursor: grab;
+}
+
+.action-btn {
+  display: block;
+  color: white;
+  padding: 1rem;
+  background-color: #42a36b;
+  border-radius: 1rem;
+  margin: 0.75rem auto 0;
+  border: none;
+  width: 200px;
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  color: #35495e;
+  background-color: #54c77f;
+  cursor: grab;
+}
+
+.delete-btn {
+  background-color: #c94f4f;
+}
+
+.delete-btn:hover {
+  background-color: #e06666;
+}
+
+.bottom-buttons {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
 }
 
 </style>
