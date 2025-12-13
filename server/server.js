@@ -45,6 +45,7 @@ app.get('/api/post/:id', async (req, res) => {
 app.delete('/api/delete/allPosts', async (req, res) => {
     try {
         await pool.query('DELETE FROM posttable');
+        res.status(204).json({ "Msg": "All posts deleted" }).send
     } catch (e) {
         console.log(e.message);
     }

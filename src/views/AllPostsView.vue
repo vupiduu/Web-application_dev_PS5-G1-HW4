@@ -9,7 +9,6 @@
       <p>sidebar-left</p>
     </div>
     <div id="main-content">
-      Test
       <button id="logout" @click="Logout">Logout</button>
 
       <div class="posts-area">
@@ -62,12 +61,14 @@ export default {
       this.$router.push("/add-post");
     },
 
-    async deleteAllPosts() {
-      await fetch("http://localhost:3000/api/delete/allPosts", {
+    deleteAllPosts() {
+      fetch("http://localhost:3000/api/delete/allPosts", {
         method: "DELETE",
         credentials: "include",
+      }).then(() => {
+        window.location.assign("/");
       });
-      alert("All posts deleted!");
+
     },
 
     async fetchPosts() {
